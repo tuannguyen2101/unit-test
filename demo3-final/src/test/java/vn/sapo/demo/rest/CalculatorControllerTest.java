@@ -93,6 +93,12 @@ class CalculatorControllerTest {
         var json = "{\"instant\": 2022-04-23T18:35:24.00Z, \"operator\": PLUS}";
 
         when(calculatorService.getCalculator(eq(instant), eq(CalculatorHistory.Operator.PLUS))).thenReturn(new ArrayList<>());
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/calculator/history")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                ).andExpect(status().isOk())
+                .andExpect(jsonPath("$.histories").value(new ArrayList<>()));
     }
 
 }
