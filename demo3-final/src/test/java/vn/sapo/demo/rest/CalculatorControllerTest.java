@@ -8,11 +8,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import vn.sapo.demo.CalculatorService;
+import vn.sapo.demo.dal.CalculatorHistory;
 
 import javax.print.attribute.standard.Media;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -85,8 +89,10 @@ class CalculatorControllerTest {
 
     @Test
     void shouldGetCalculatorHistoriesSuccess() throws Exception {
-        var json = "";
-//        when(calculatorService.getCalculator(eq()))
+        Instant instant = Instant.now();
+        var json = "{\"instant\": 2022-04-23T18:35:24.00Z, \"operator\": PLUS}";
+
+        when(calculatorService.getCalculator(eq(instant), eq(CalculatorHistory.Operator.PLUS))).thenReturn(new ArrayList<>());
     }
 
 }

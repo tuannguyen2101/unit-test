@@ -42,8 +42,8 @@ public class CalculatorController {
     }
 
     @GetMapping("/history")
-    public List<CalculatorHistory> get(Instant instant, CalculatorHistory.Operator operator) {
-        return calculatorService.getCalculator(instant, operator);
+    public List<CalculatorHistory> get(@RequestBody CalculatorHistoryRequest request) {
+        return calculatorService.getCalculator(request.getInstant(), request.getOperator());
     }
 
 }
